@@ -1,0 +1,8 @@
+Region,Date,Temperature,Humidity,Rainfall
+Mumbai,2023-01-01,28,85,12.5
+Delhi,2023-01-01,32,60,5.0
+Chennai,2023-01-01,35,90,20.0
+Kolkata,2023-01-01,30,70,8.5
+Bengaluru,2023-01-01,25,75,15.0
+Mumbai,2023-01-02,29,82,10.0
+Delhi,2023-01-02,33,65,4.5

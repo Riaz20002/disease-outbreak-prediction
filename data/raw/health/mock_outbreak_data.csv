@@ -1,0 +1,8 @@
+Region,Date,NewCases,Humidity,PopulationDensity,OutbreakRisk
+Mumbai,2023-01-01,120,85,20000,1
+Delhi,2023-01-01,80,60,15000,0
+Chennai,2023-01-01,200,90,18000,1
+Kolkata,2023-01-01,50,70,17000,0
+Bengaluru,2023-01-01,150,75,19000,1
+Mumbai,2023-01-02,130,82,20000,1
+Delhi,2023-01-02,85,65,15000,0
