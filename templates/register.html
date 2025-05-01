@@ -1,166 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Outbreak Prediction System</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Outbreak Prediction System</title>
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            padding: 20px;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    /* Particles background */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
 
-        .logo h1 {
-            color: #2a5298;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      z-index: 2;
+      position: relative;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
+    .logo h1 {
+      color: #2a5298;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e1e1;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
+    .logo p {
+      font-size: 14px;
+      color: #555;
+    }
 
-        .form-group input:focus {
-            border-color: #2a5298;
-            outline: none;
-        }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: #2a5298;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
 
-        .submit-btn:hover {
-            background: #1e3c72;
-        }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e1e1e1;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
 
-        .links {
-            margin-top: 20px;
-            text-align: center;
-        }
+    .form-group input:focus {
+      border-color: #2a5298;
+      outline: none;
+    }
 
-        .links a {
-            color: #2a5298;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #2a5298;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .links a:hover {
-            color: #1e3c72;
-        }
+    .submit-btn:hover {
+      background: #1e3c72;
+    }
 
-        .password-requirements {
-            font-size: 12px;
-            color: #666;
-            margin-top: 5px;
-        }
+    .links {
+      margin-top: 20px;
+      text-align: center;
+    }
 
-        .error-message {
-            background: #ffe6e6;
-            color: #d63031;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            display: none;
-        }
+    .links a {
+      color: #2a5298;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 20px;
-            }
-        }
-    </style>
+    .links a:hover {
+      color: #1e3c72;
+    }
+
+    .password-requirements {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .error-message {
+      background: #ffe6e6;
+      color: #d63031;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="logo">
-            <h1>Outbreak Prediction System</h1>
-            <p>Create a new account</p>
-        </div>
-        
-        <div class="error-message" id="error-message"></div>
-        
-        <form method="POST" action="{{ url_for('register') }}" id="register-form">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required minlength="3" maxlength="20" autocomplete="username">
-                <div class="password-requirements">Username must be 3-20 characters long</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required autocomplete="email">
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
-                <div class="password-requirements">
-                    Password must be at least 8 characters long and contain letters and numbers
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" required autocomplete="new-password">
-            </div>
-            
-            <button type="submit" class="submit-btn">Register</button>
-            
-            <div class="links">
-                <a href="{{ url_for('login') }}">Already have an account? Login</a>
-            </div>
-        </form>
+  <!-- Particles background -->
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <div class="logo">
+      <h1>Outbreak Prediction System</h1>
+      <p>Create a new account</p>
     </div>
+    
+    <div class="error-message" id="error-message"></div>
+    
+    <form method="POST" action="{{ url_for('register') }}" id="register-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required minlength="3" maxlength="20" autocomplete="username">
+        <div class="password-requirements">Username must be 3-20 characters long</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required minlength="8" autocomplete="new-password">
+        <div class="password-requirements">
+          Password must be at least 8 characters long and contain letters and numbers
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required autocomplete="new-password">
+      </div>
+      
+      <button type="submit" class="submit-btn">Register</button>
+      
+      <div class="links">
+        <a href="{{ url_for('login') }}">Already have an account? Login</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Load particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Initialize particles -->
+  <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": { "value": 50 },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.2 },
+        "size": { "value": 3 },
+        "move": { "enable": true, "speed": 1.5 }
+      }
+    });
+  </script>
+
+  <!-- Optional Form Validation -->
+  <script>
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirm-password').value.trim();
+      const errorMessage = document.getElementById('error-message');
+
+      if (password !== confirmPassword) {
+        e.preventDefault();
+        errorMessage.style.display = 'block';
+        errorMessage.textContent = 'Passwords do not match!';
+      }
+    });
+  </script>
 </body>
 </html>

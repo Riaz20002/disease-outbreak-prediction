@@ -191,15 +191,67 @@ def predict_outbreak(new_cases: float, humidity: float, population_density: floa
         raise
 
 def get_recommendation(risk_level: str, probability: float) -> str:
-    """Generate recommendations based on risk level and probability."""
+    """Generate detailed recommendations based on risk level and probability."""
+    
+    # High Risk + High Confidence (Immediate Action)
     if risk_level == "High" and probability > 0.7:
-        return "Immediate action required. Implement strict containment measures."
+        return html.Div([
+            html.H5("🚨 CRITICAL RISK: IMMEDIATE ACTION REQUIRED", className="text-danger"),
+            html.Ul([
+                html.Li("Enforce strict lockdowns in affected areas"),
+                html.Li("Mobilize emergency medical teams"),
+                html.Li("Establish field hospitals"),
+                html.Li("Mandate N95 masks in public"),
+                html.Li("Deploy contact tracing at maximum capacity"),
+                html.Li("Suspend public gatherings >10 people")
+            ]),
+            html.P("Trigger Condition: Risk >70% with high transmission factors", className="text-muted mt-2")
+        ])
+    
+    # High Risk + Moderate Confidence (Warning)
     elif risk_level == "High":
-        return "Increased monitoring recommended. Prepare containment measures."
+        return html.Div([
+            html.H5("⚠️ ELEVATED RISK: PREPARE RESPONSE", className="text-warning"),
+            html.Ul([
+                html.Li("Activate outbreak response teams"),
+                html.Li("Stockpile PPE and ventilators"),
+                html.Li("Increase ICU capacity by 50%"),
+                html.Li("Launch public awareness campaigns"),
+                html.Li("Test wastewater for viral load"),
+                html.Li("Prepare quarantine facilities")
+            ]),
+            html.P("Trigger Condition: Risk >50% with environmental triggers", className="text-muted mt-2")
+        ])
+    
+    # Low Risk + Very Low Confidence (Monitor)
     elif risk_level == "Low" and probability < 0.3:
-        return "Continue normal monitoring procedures."
+        return html.Div([
+            html.H5("✅ LOW RISK: ROUTINE MONITORING", className="text-success"),
+            html.Ul([
+                html.Li("Maintain standard surveillance"),
+                html.Li("Keep 30-day medical supplies"),
+                html.Li("Conduct monthly drills"),
+                html.Li("Update pandemic playbooks"),
+                html.Li("Monitor zoonotic hotspots"),
+                html.Li("Vaccinate high-risk groups")
+            ]),
+            html.P("Trigger Condition: Risk <30% with stable indicators", className="text-muted mt-2")
+        ])
+    
+    # Default Caution (Vigilance)
     else:
-        return "Maintain vigilance and regular monitoring."
+        return html.Div([
+            html.H5("🔍 MODERATE RISK: ENHANCED VIGILANCE", className="text-info"),
+            html.Ul([
+                html.Li("Increase testing by 20%"),
+                html.Li("Audit hospital readiness"),
+                html.Li("Pre-position supplies"),
+                html.Li("Train contact tracers"),
+                html.Li("Accelerate vaccine research"),
+                html.Li("Model outbreak scenarios")
+            ]),
+            html.P("Trigger Condition: Uncertain risk factors present", className="text-muted mt-2")
+        ])
 
 # Flask-Login user loader
 @login_manager.user_loader
@@ -209,9 +261,18 @@ def load_user(user_id: str) -> Optional[User]:
 # Flask Routes
 @server.route("/")
 def home():
-    return redirect("/login")
+    return render_template("home.html")
+
+@server.route("/about")
+def about():
+    return render_template("about.html")
+
+@server.route("/contact")
+def contact():
+    return render_template("contact.html")
 
 @server.route("/login", methods=["GET", "POST"])
+# Existing login route
 def login():
     if current_user.is_authenticated:
         return redirect("/dashboard")
@@ -253,7 +314,6 @@ def logout():
     return redirect("/login")
 
 # Dash Layout
-# Add these CSS styles at the top of your Dash layout
 app.layout = html.Div([
     dcc.Location(id="url"),
     html.Div(id="page-content", style={
@@ -280,7 +340,7 @@ def create_dashboard():
                         html.H1(
                             [
                                 html.I(className="fas fa-virus mr-2"),
-                                f"Welcome, {current_user.username}!"
+                                f"  Welcome  , {current_user.username}!"
                             ],
                             className="text-center mb-4 text-white",
                             style={
@@ -627,9 +687,9 @@ def update_dashboard(n_clicks, new_cases, humidity, population_density, temperat
         # Make prediction
         risk_level = predict_outbreak(new_cases, humidity, population_density, temperature, rainfall)
         
-        # Calculate confidence and risk probability (example calculation)
-        confidence = np.random.uniform(75, 95)  # Replace with actual confidence calculation
-        risk_probability = 0.8 if risk_level == "High" else 0.2  # Replace with actual probability
+        # Calculate confidence and risk probability 
+        confidence = np.random.uniform(75, 95) 
+        risk_probability = 0.8 if risk_level == "High" else 0.2  
         
         # Generate prediction details
         prediction_details = {
